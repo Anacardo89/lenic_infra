@@ -1,0 +1,19 @@
+name: Terraform Dev CI
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  terraform:
+    name: Validate Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.12.2
+
+      - run: terraform init
+      - run: terraform plan
