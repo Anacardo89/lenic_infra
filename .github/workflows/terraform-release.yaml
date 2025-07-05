@@ -18,9 +18,11 @@ jobs:
       - name: Create terraform.tfvars
         run: |
           cat > terraform.tfvars <<EOF
-          aws_region = "eu-west-3"
-          project_name = "Lenic"
-          env = "dev"
+          aws_region         = "eu-west-3"
+          project_name       = "Lenic"
+          env                = "dev"
+          ec2_ssh_public_key = "${{ secrets.EC2_SSH_PUBLIC_KEY }}"
+          key_pair_name      = "Lenic-EC2-key"
           EOF
 
       - run: terraform init
