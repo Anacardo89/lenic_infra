@@ -25,6 +25,17 @@ resource "aws_subnet" "private" {
   }
 }
 
+resource "aws_subnet" "private-b" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.0.128/26"
+  availability_zone = var.aws_region != "" ? "${var.aws_region}b" : null
+
+  tags = {
+    Name = "${var.project_name}-${var.env}-private-subnet-b"
+  }
+}
+
+
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
