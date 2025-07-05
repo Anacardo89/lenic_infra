@@ -1,6 +1,9 @@
 resource "aws_db_subnet_group" "default" {
   name       = lower("${var.project_name}-${var.env}-db-subnet-group")
-  subnet_ids = [aws_subnet.private.id]
+  subnet_ids = [
+    aws_subnet.private.id,
+    aws_subnet.private_b.id
+  ]
 
   tags = {
     Name = "${var.project_name}-${var.env}-db-subnet-group"
