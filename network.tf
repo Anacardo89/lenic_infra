@@ -25,9 +25,9 @@ resource "aws_subnet" "private" {
   }
 }
 
-resource "aws_subnet" "private-b" {
+resource "aws_subnet" "private_b" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.0.128/26"
+  cidr_block        = "10.0.0.128/27"
   availability_zone = var.aws_region != "" ? "${var.aws_region}b" : null
 
   tags = {
