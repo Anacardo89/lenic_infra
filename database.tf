@@ -12,7 +12,7 @@ resource "aws_db_instance" "postgres" {
   engine               = "postgres"
   engine_version       = "15.3"
   instance_class       = "db.t3.micro"
-  identifier           = "${var.project_name}-${var.env}-postgres"
+  identifier           = lower("${var.project_name}-${var.env}-postgres")
   username             = var.db_user
   password             = var.db_password
   db_subnet_group_name = aws_db_subnet_group.default.name
