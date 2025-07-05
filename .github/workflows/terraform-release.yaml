@@ -23,6 +23,9 @@ jobs:
           env                = "dev"
           ec2_ssh_public_key = "${{ secrets.EC2_SSH_PUBLIC_KEY }}"
           key_pair_name      = "Lenic-EC2-key"
+          db_name            = "${{ secrets.DB_NAME }}"
+          db_user            = "${{ secrets.DB_USER }}"
+          db_password        = "${{ secrets.DB_PASSWORD }}"
           EOF
 
       - run: terraform init
