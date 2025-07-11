@@ -3,7 +3,7 @@
 ### [v0.1.0] — 2025-07-05
 #### Added
 - Implemented SSH key pair integration for secure remote access to EC2 
-- Created secure connectivity from EC2 
+- Created secure connectivity for EC2 
 - Verified minimal infrastructure deployment enabling backend
 - Prepared outputs for easy retrieval of EC2 connection details 
 
