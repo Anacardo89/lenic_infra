@@ -1,45 +1,38 @@
-resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/24"
+resource "aws_vpc" "vpc" {
+  cidr_block = "10.0.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
   tags = {
-    Name = "${var.project_name}-${var.env}-vpc"
+    Name        = "${var.project_name}-${var.env}-vpc"
+    Project     = var.project_name
+    Environment = var.env
+    ManagedBy   = "Terraform"
   }
 }
 
-resource "aws_subnet" "public" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.0.0/25"  
-  availability_zone = var.aws_region != "" ? "${var.aws_region}a" : null
+resource "aws_subnet" "public_web" {
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = "10.0.0.0/25"
+  availability_zone       = "${var.aws_region}a"
+  map_public_ip_on_launch = true
 
   tags = {
-    Name = "${var.project_name}-${var.env}-public-subnet"
+    Name        = "${var.project_name}-${var.env}-public-web"
+    Project     = var.project_name
+    Environment = var.env
+    ManagedBy   = "Terraform"
+    Tier        = "Public"
+    AZ          = "${var.aws_region}a"
   }
 }
-
-resource "aws_subnet" "private" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.0.128/26"
-  availability_zone = var.aws_region != "" ? "${var.aws_region}a" : null
-
-  tags = {
-    Name = "${var.project_name}-${var.env}-private-subnet"
-  }
-}
-
-resource "aws_subnet" "private_b" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.0.128/27"
-  availability_zone = var.aws_region != "" ? "${var.aws_region}b" : null
-
-  tags = {
-    Name = "${var.project_name}-${var.env}-private-subnet-b"
-  }
-}
-
 
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.vpc.id
 
   tags = {
-    Name = "${var.project_name}-${var.env}-igw"
+    Name        = "${var.project_name}-${var.env}-igw"
+    Project     = var.project_name
+    Environment = var.env
+    ManagedBy   = "Terraform"
   }
 }
