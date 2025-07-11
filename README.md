@@ -14,7 +14,6 @@ All infrastructure is managed via [Terraform](https://www.terraform.io/) and dep
 - `routing.tf`         – Routing configuration
 - `security.tf`        – Security group definitions (firewall rules)
 - `ec2.tf`             – EC2 instance
-- `database.tf`        – RDS/Postgres resources
 - `ssh.tf`             – SSH key pair import and related setup
 - `outputs.tf`         – Outputs for EC2 and RDS
 - `terraform.tfvars`   – Project/environment-specific variable values (not committed, redeclared in workflows)
@@ -66,7 +65,6 @@ See [CHANGELOG.md](./CHANGELOG.md) for a history of changes and versions.
 - [ ] Provision basic AWS resources
   - [x] Create VPC, subnets, gateway, routing and security group
   - [x] Launch EC2 instance
-  - [x] Set up RDS for Postgres
   - [ ] Set up S3 bucket for assets
 - [ ] Deploy backend services
 - [ ] Enable monitoring/logging
