@@ -8,25 +8,23 @@ jobs:
   terraform:
     name: Validate Terraform
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      TF_VAR_env: dev
+      TF_VAR_aws_region: eu-west-3
+      TF_VAR_project_name: lenic
+      TF_VAR_ec2_key_pair_name: lenic-ec2-keypair
+      TF_VAR_ec2_ssh_public_key: ${{ secrets.EC2_SSH_PUBLIC_KEY }}
+      TF_VAR_db_name: lenic-db
+      TF_VAR_db_user: ${{ secrets.DB_USER }}
+      TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.12.2
-      
-      - name: Create terraform.tfvars
-        run: |
-          cat > terraform.tfvars <<EOF
-          aws_region         = "eu-west-3"
-          project_name       = "Lenic"
-          env                = "dev"
-          ec2_ssh_public_key = "${{ secrets.EC2_SSH_PUBLIC_KEY }}"
-          key_pair_name      = "Lenic-EC2-key"
-          db_name            = "${{ secrets.DB_NAME }}"
-          db_user            = "${{ secrets.DB_USER }}"
-          db_password        = "${{ secrets.DB_PASSWORD }}"
-          EOF
 
       - run: terraform init
       - run: terraform plan -input=false
