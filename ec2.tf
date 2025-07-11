@@ -3,7 +3,7 @@ resource "aws_instance" "lenic_server" {
   instance_type = var.instance_type
 
   subnet_id = aws_subnet.public_web.id
-  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
+  vpc_security_group_ids = [aws_security_group.ec2_access.id]
 
   key_name = var.ec2_keypair_name
 

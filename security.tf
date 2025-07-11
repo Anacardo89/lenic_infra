@@ -1,7 +1,7 @@
 resource "aws_security_group" "ec2_access" {
   name        = "${var.project_name}-${var.env}-ec2-sg"
   description = "Allow SSH and HTTP"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = aws_vpc.vpc.id
 
   ingress {
     description = "SSH"
