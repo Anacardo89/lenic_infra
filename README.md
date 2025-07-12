@@ -65,6 +65,7 @@ See [CHANGELOG.md](./CHANGELOG.md) for a history of changes and versions.
 - [ ] Provision basic AWS resources
   - [x] Create VPC, subnets, gateway, routing and security group
   - [x] Launch EC2 instance
+  - [ ] Set up RDS for Postgres
   - [ ] Set up S3 bucket for assets
 - [ ] Deploy backend services
 - [ ] Enable monitoring/logging

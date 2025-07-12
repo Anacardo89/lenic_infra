@@ -1,7 +1,12 @@
-name: Terraform Destroy Dev
+name: Terraform Destroy Dev Infrastructure (Manual)
 
 on:
-  workflow_dispatch:  # manual trigger
+  workflow_dispatch:
+    inputs:
+      confirm-destroy:
+        description: 'Type "destroy" to confirm'
+        required: true
+        default: 'no'
 
 jobs:
   terraform-destroy:
@@ -15,7 +20,7 @@ jobs:
       TF_VAR_project_name: lenic
       TF_VAR_ec2_keypair_name: lenic-ec2-keypair
       TF_VAR_ec2_ssh_public_key: ${{ secrets.EC2_SSH_PUBLIC_KEY }}
-      TF_VAR_db_name: lenic-db
+      TF_VAR_db_name: lenicdb
       TF_VAR_db_user: ${{ secrets.DB_USER }}
       TF_VAR_db_password: ${{ secrets.DB_PASSWORD }}
 
@@ -28,6 +33,13 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+
+      - name: Confirm Destroy Input
+        run: |
+          if [[ "${{ github.event.inputs.confirm-destroy }}" != "destroy" ]]; then
+            echo "Destroy not confirmed. Aborting."
+            exit 1
+          fi
 
       - name: Terraform Plan (Destroy Preview)
         run: terraform plan -destroy -input=false
