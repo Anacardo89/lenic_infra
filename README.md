@@ -10,14 +10,16 @@ All infrastructure is managed via [Terraform](https://www.terraform.io/) and dep
 
 - `main.tf`            – Entry point for Terraform config
 - `variables.tf`       – Input variable definitions
+- `ami.tf`             – AMI data source configuration for EC2
 - `network.tf`         – VPC, subnets and Gateway
 - `routing.tf`         – Routing configuration
-- `security.tf`        – Security group definitions (firewall rules)
+- `security.tf`        – Security group definitions
 - `ec2.tf`             – EC2 instance
+- `rds.tf`             – RDS PostgreSQL instance
 - `ssh.tf`             – SSH key pair import and related setup
 - `outputs.tf`         – Outputs for EC2 and RDS
 - `terraform.tfvars`   – Project/environment-specific variable values (not committed, redeclared in workflows)
-- `.github/workflows/` – CI/CD pipelines for plan and apply stages
+- `.github/workflows/` – CI/CD pipelines for plan and apply stages and manual workflows
 
 ---
 
@@ -65,7 +67,7 @@ See [CHANGELOG.md](./CHANGELOG.md) for a history of changes and versions.
 - [ ] Provision basic AWS resources
   - [x] Create VPC, subnets, gateway, routing and security group
   - [x] Launch EC2 instance
-  - [ ] Set up RDS for Postgres
+  - [x] Set up and launch RDS for Postgres
   - [ ] Set up S3 bucket for assets
 - [ ] Deploy backend services
 - [ ] Enable monitoring/logging
