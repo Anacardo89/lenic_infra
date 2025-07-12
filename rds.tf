@@ -17,7 +17,7 @@ resource "aws_db_instance" "postgres" {
   allocated_storage       = 20
   engine                  = "postgres"
   engine_version          = "17.5"
-  instance_class          = "db.t2.micro"
+  instance_class          = "db.t3.micro"
   identifier              = "${var.project_name}-${var.env}-postgres"
   username                = var.db_user
   password                = var.db_password
