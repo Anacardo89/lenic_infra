@@ -1,6 +1,12 @@
 # Changelog
 
-### [v0.1.0] — 2025-07-05
+### [v0.2.0] — 2025-07-12
+#### Added
+- Configured S3 backend and DynamoDB table for Terraform state management and locking
+- Declared and launched a PostgreSQL RDS instance with secure access
+- Created manual `plan`, `apply`, and `destroy` workflows for controlled infrastructure lifecycle
+
+### [v0.1.0] — 2025-07-11
 #### Added
 - Implemented SSH key pair integration for secure remote access to EC2 
 - Created secure connectivity for EC2 
