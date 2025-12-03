@@ -21,13 +21,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.12.2
 
       - name: Terraform Init
         run: terraform init
-
+      - name: Terraform Validate
+        run: terraform validate
       - name: Terraform Plan
         run: terraform plan -input=false
