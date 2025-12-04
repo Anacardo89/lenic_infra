@@ -16,9 +16,9 @@ resource "aws_instance" "lenic_server" {
   }
 
   tags = {
-    Name        = "${var.project_name}-${var.env}-server"
+    Name        = "${var.project_name}-${var.environment}-server"
     Project     = var.project_name
-    Environment = var.env
+    Environment = var.environment
     ManagedBy   = "Terraform"
   }
 }

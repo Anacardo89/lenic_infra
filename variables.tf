@@ -1,27 +1,31 @@
-variable "env" {
+# Global
+variable "environment" {
   type        = string
+  default     = "dev"
   description = "Deployment environment (e.g. dev, prod)"
 }
 
 variable "aws_region" {
   type        = string
+  default     = "eu-west-3"
   description = "AWS region for the deployment"
 }
 
 variable "project_name" {
   type        = string
+  default     = "lenic"
   description = "Name of the project"
 }
 
 variable "instance_type" {
   type        = string
-  description = "EC2 instance type"
   default     = "t2.micro"
+  description = "EC2 instance type"
 }
 
 variable "ec2_keypair_name" {
-  description = "Name of the existing AWS key pair for SSH access"
   type        = string
+  description = "Name of the existing AWS key pair for SSH access"
 }
 
 variable "ec2_ssh_public_key" {
@@ -30,17 +34,27 @@ variable "ec2_ssh_public_key" {
 }
 
 variable "db_name" {
-  description = "Database name"
   type        = string
+  description = "Database name"
 }
 
 variable "db_user" {
-  description = "Database admin username"
   type        = string
+  description = "Database admin username"
 }
 
 variable "db_password" {
-  description = "Database admin password"
   type        = string
   sensitive   = true
+  description = "Database admin password"
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "ID of the VPC where RDS will reside"
+}
+
+variable "ec2_security_group_id" {
+  type        = string
+  description = "Security group ID for EC2 instances allowed to access RDS"
 }

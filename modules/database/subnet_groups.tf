@@ -1,0 +1,11 @@
+resource "aws_db_subnet_group" "rds_subnet_group" {
+  name       = "${var.project_name}-${var.environment}-db-subnet-group"
+  subnet_ids = var.private_db_subnet_ids
+
+  tags = {
+    Name        = "${var.project_name}-${var.environment}-db-subnet-group"
+    Project     = var.project_name
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
+}
