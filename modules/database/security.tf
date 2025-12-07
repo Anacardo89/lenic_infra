@@ -1,4 +1,4 @@
-resource "aws_security_group" "rds_access" {
+resource "aws_security_group" "this" {
   name        = "${var.project_name}-${var.environment}-rds-sg"
   description = "Allow Postgres access from EC2"
   vpc_id      = var.vpc_id

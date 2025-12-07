@@ -17,6 +17,37 @@ variable "project_name" {
   description = "Name of the project"
 }
 
+# Network
+variable "vpc_cidr" {
+  type        = string
+  default     = "10.0.0.0/16"
+  description = "CIDR block for the VPC"
+}
+
+variable "public_subnets" {
+  type = list(object({
+    cidr = string
+    az   = string
+  }))
+  default = [
+    { cidr = "10.0.0.0/25", az = "eu-west-3a" }
+  ]
+  description = "Public subnets with CIDR and AZ"
+}
+
+variable "private_subnets" {
+  type = list(object({
+    cidr = string
+    az   = string
+  }))
+  default = [
+    { cidr = "10.0.0.128/28", az = "eu-west-3a" },
+    { cidr = "10.0.0.144/28", az = "eu-west-3b" }
+  ]
+  description = "Private subnets with CIDR and AZ"
+}
+
+# Compute
 variable "instance_type" {
   type        = string
   default     = "t2.micro"
@@ -33,6 +64,13 @@ variable "ec2_ssh_public_key" {
   description = "SSH Public key for EC2"
 }
 
+variable "ec2_security_group_id" {
+  type        = string
+  description = "Security group ID for EC2 instances allowed to access RDS"
+}
+
+
+# Database
 variable "db_name" {
   type        = string
   description = "Database name"
@@ -47,14 +85,4 @@ variable "db_password" {
   type        = string
   sensitive   = true
   description = "Database admin password"
-}
-
-variable "vpc_id" {
-  type        = string
-  description = "ID of the VPC where RDS will reside"
-}
-
-variable "ec2_security_group_id" {
-  type        = string
-  description = "Security group ID for EC2 instances allowed to access RDS"
 }

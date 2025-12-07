@@ -1,7 +1,7 @@
-resource "aws_security_group" "ec2_access" {
+resource "aws_security_group" "this" {
   name        = "${var.project_name}-${var.environment}-ec2-sg"
   description = "Allow SSH and HTTP/HTTPS"
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = var.vpc_id
 
   ingress {
     description = "SSH"
@@ -19,7 +19,7 @@ resource "aws_security_group" "ec2_access" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-    ingress {
+  ingress {
     description = "HTTPS"
     from_port   = 443
     to_port     = 443
@@ -41,4 +41,3 @@ resource "aws_security_group" "ec2_access" {
     ManagedBy   = "Terraform"
   }
 }
-

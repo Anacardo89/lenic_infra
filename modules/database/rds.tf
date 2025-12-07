@@ -1,4 +1,4 @@
-resource "aws_db_instance" "postgres" {
+resource "aws_db_instance" "this" {
   allocated_storage       = 20
   engine                  = "postgres"
   engine_version          = "17.5"
@@ -7,7 +7,7 @@ resource "aws_db_instance" "postgres" {
   db_name                 = "${var.db_name}"
   username                = var.db_user
   password                = var.db_password
-  db_subnet_group_name    = aws_db_subnet_group.rds_subnet_group.name
+  db_subnet_group_name    = aws_db_subnet_group.this.name
   vpc_security_group_ids  = var.vpc_security_group_ids
   skip_final_snapshot     = true
   publicly_accessible     = false

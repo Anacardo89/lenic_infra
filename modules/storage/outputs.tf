@@ -1,7 +1,7 @@
-output "config_bucket_name" {
-  value = aws_s3_bucket.lenic_config.bucket
+output "bucket_name" {
+  value = aws_s3_bucket.this.bucket
 }
 
-output "config_bucket_arn" {
-  value = aws_s3_bucket.lenic_config.arn
+output "bucket_arn" {
+  value = aws_s3_bucket.this.arn
 }
