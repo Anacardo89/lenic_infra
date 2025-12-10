@@ -1,28 +1,44 @@
-# Terraform user → admin permissions (temporary for bootstrapping)
+# Terraform user
 resource "aws_iam_policy_attachment" "terraform_attach" {
   name       = "terraform-attach-${var.environment}"
   policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
   groups     = [aws_iam_group.terraform_group.name]
 }
 
-# Builder user → limited permissions for EC2, S3, RDS
+# Builder user
 resource "aws_iam_policy" "builder_policy" {
-  name        = "${var.project_name}-builder-policy-${var.environment}"
-  description = "Allows deploying the application"
+  name        = "${var.project_name}-${var.environment}-builder-policy"
+  description = "CI/CD deployment permissions"
   policy      = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Action   = [
-          "ec2:*",
-          "s3:*",
-          "rds:*"
+        Effect = "Allow"
+        Action = [
+          "ec2:DescribeInstances",
+          "ec2:DescribeImages",
+          "ec2:DescribeSecurityGroups",
+          "ec2:DescribeVolumes",
+          "ec2:DescribeTags"
         ]
-        Effect   = "Allow"
         Resource = "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "s3:PutObject"
+        ],
+        "Resource": "arn:aws:s3:::your-bucket-name/*"
       }
     ]
   })
+
+  tags = {
+    Name        = "${var.project_name}-${var.environment}-builder-policy"
+    Project     = var.project_name
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
 }
 
 resource "aws_iam_policy_attachment" "builder_attach" {
@@ -31,25 +47,38 @@ resource "aws_iam_policy_attachment" "builder_attach" {
   groups     = [aws_iam_group.builder_group.name]
 }
 
-# Runner user → runtime permissions (e.g., read from S3, connect to RDS)
+# Runnser user
 resource "aws_iam_policy" "runner_policy" {
-  name        = "${var.project_name}-runner-policy-${var.environment}"
-  description = "Permissions for application runtime"
+  name        = "${var.project_name}-${var.environment}-runner-policy"
+  description = "Application runtime permissions"
   policy      = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Action   = [
-          "rds:*",
-          "s3:GetObject",
-          "s3:ListBucket"
-        ]
+        "Effect": "Allow",
+        "Action": [
+          "rds-db:connect"
+        ],
+        "Resource": "arn:aws:rds-db:region:account-id:dbuser:dbi-resource-id/db-username"
+      },
+      {
         Effect   = "Allow"
+        Action   = [
+          "s3:GetObject"
+        ]
         Resource = "*"
       }
     ]
   })
+
+  tags = {
+    Name        = "${var.project_name}-${var.environment}-runner-policy"
+    Project     = var.project_name
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
 }
+
 
 resource "aws_iam_policy_attachment" "runner_attach" {
   name       = "runner-attach-${var.environment}"

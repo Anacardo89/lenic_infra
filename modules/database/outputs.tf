@@ -6,19 +6,6 @@ output "rds_port" {
   value = aws_db_instance.this.port
 }
 
-output "rds_db_name" {
-  value = aws_db_instance.this.db_name
-}
-
-output "rds_username" {
-  value = aws_db_instance.this.username
-}
-
-output "rds_password" {
-  value     = aws_db_instance.this.password
-  sensitive = true
-}
-
 output "rds_subnet_group_name" {
   value = aws_db_subnet_group.this.name
 }

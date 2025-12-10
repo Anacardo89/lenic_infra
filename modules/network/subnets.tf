@@ -7,7 +7,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name        = "${var.project_name}-${var.environment}-public-${each.key}"
+    Name        = "${var.project_name}-${var.environment}-subnet-public"
     Project     = var.project_name
     Environment = var.environment
     ManagedBy   = "Terraform"
@@ -24,7 +24,7 @@ resource "aws_subnet" "private" {
   availability_zone = each.value.az
 
   tags = {
-    Name        = "${var.project_name}-${var.environment}-private-${each.key}"
+    Name        = "${var.project_name}-${var.environment}-subnet-private"
     Project     = var.project_name
     Environment = var.environment
     ManagedBy   = "Terraform"

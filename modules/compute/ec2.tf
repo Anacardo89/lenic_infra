@@ -14,7 +14,7 @@ resource "aws_instance" "this" {
   }
 
   tags = {
-    Name        = "${var.project_name}-${var.environment}-server"
+    Name        = "${var.project_name}-${var.environment}-ec2"
     Project     = var.project_name
     Environment = var.environment
     ManagedBy   = "Terraform"

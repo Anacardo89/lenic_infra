@@ -19,16 +19,16 @@ variable "db_password" {
   sensitive   = true
 }
 
+variable "vpc_id" {
+  type = string
+}
+
 variable "private_db_subnet_ids" {
   type = list(string)
 }
 
 variable "vpc_security_group_ids" {
   type = list(string)
-}
-
-variable "vpc_id" {
-  type = string
 }
 
 variable "ec2_security_group_id" {

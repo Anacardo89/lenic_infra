@@ -15,7 +15,7 @@ resource "aws_db_instance" "this" {
   backup_retention_period = 0
 
   tags = {
-    Name        = "${var.project_name}-${var.environment}-postgres"
+    Name        = "${var.project_name}-${var.environment}-rds"
     Project     = var.project_name
     Environment = var.environment
     ManagedBy   = "Terraform"

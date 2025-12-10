@@ -6,4 +6,11 @@ data "aws_ami" "this" {
     name   = "name"
     values = ["al2023-ami-*-x86_64"]
   }
+
+    tags = {
+    Name        = "${var.project_name}-${var.environment}-ami"
+    Project     = var.project_name
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
 }

@@ -56,6 +56,7 @@ variable "instance_type" {
 
 variable "ec2_keypair_name" {
   type        = string
+  default     = "lenic-ec2-keypair"
   description = "Name of the existing AWS key pair for SSH access"
 }
 
@@ -64,20 +65,16 @@ variable "ec2_ssh_public_key" {
   description = "SSH Public key for EC2"
 }
 
-variable "ec2_security_group_id" {
-  type        = string
-  description = "Security group ID for EC2 instances allowed to access RDS"
-}
-
-
 # Database
 variable "db_name" {
   type        = string
+  default     = "lenicDB"
   description = "Database name"
 }
 
 variable "db_user" {
   type        = string
+  default     = "lenic_admin"
   description = "Database admin username"
 }
 
