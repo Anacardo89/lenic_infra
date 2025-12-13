@@ -1,10 +1,3 @@
-# Terraform user
-resource "aws_iam_policy_attachment" "terraform_attach" {
-  name       = "terraform-attach-${var.environment}"
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
-  groups     = [aws_iam_group.terraform_group.name]
-}
-
 # Builder user
 resource "aws_iam_policy" "builder_policy" {
   name        = "${var.project_name}-${var.environment}-builder-policy"

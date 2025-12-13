@@ -1,4 +1,13 @@
 # Global
+variable "aws_terraform_key" {
+  type        = string
+  description = "Terraform user access Key ID"
+}
+variable "aws_terraform_secret" {
+  type        = string
+  description = "Terraform user access Key secret"
+}
+
 variable "environment" {
   type        = string
   default     = "dev"
