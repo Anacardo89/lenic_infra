@@ -56,10 +56,10 @@ resource "aws_iam_user" "runner" {
 }
 
 resource "aws_iam_user_group_membership" "runner_membership" {
-  user = aws_iam_user.runner_user.name
+  user = aws_iam_user.runner.name
   groups = [aws_iam_group.runner_group.name]
 }
 
 resource "aws_iam_access_key" "runner_key" {
-  user = aws_iam_user.runner_user.name
+  user = aws_iam_user.runner.name
 }

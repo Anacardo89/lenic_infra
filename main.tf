@@ -20,7 +20,7 @@ module "compute" {
   project_name       = var.project_name
   instance_type      = var.instance_type
   vpc_id             = module.network.vpc_id
-  subnet_id          = var.public_subnets[0].id
+  subnet_id          = module.network.public_subnet_ids[0]
   ec2_keypair_name   = var.ec2_keypair_name
   ec2_ssh_public_key = var.ec2_ssh_public_key
 }
@@ -33,7 +33,7 @@ module "database" {
   db_user                = var.db_user
   db_password            = var.db_password
   vpc_id                 = module.network.vpc_id
-  private_db_subnet_ids  = module.network.private_db_subnet_ids
+  private_db_subnet_ids  = module.network.private_subnet_ids
   vpc_security_group_ids = module.compute.vpc_security_group_ids
   ec2_security_group_id  = module.compute.ec2_security_group_id
 }

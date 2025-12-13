@@ -49,14 +49,17 @@ output "rds_endpoint" {
 }
 
 output "rds_port" {
-  value       = aws_db_instance.postgres.port
+  value       = module.database.rds_port
   description = "The port on which the RDS instance is listening"
 }
 
-output "rds_username" {
-  value       = aws_db_instance.postgres.username
-  sensitive   = true
-  description = "The master username for the RDS instance"
+# Storage
+output "bucket_name" {
+  value = module.storage.bucket_name
+  description = "The bucket name for app configs"
 }
 
-# Storage
+output "bucket_arn" {
+  value = module.storage.bucket_arn
+  description = "The bucket ARN for app configs"
+}
