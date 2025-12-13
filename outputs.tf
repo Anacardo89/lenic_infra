@@ -38,7 +38,7 @@ output "ec2_public_ip" {
 }
 
 output "ec2_public_dns" {
-  value       = module.compute.public_dns
+  value       = module.compute.ec2_public_dns
   description = "The public DNS name of the EC2 instance"
 }
 
