@@ -20,12 +20,6 @@ output "runner_access_secret" {
 }
 
 # Compute
-output "ec2_id" {
-  value       = module.compute.ec2_id
-  sensitive   = true
-  description = "The ID of the EC2 instance"
-}
-
 output "ec2_public_ip" {
   value       = module.compute.ec2_public_ip
   sensitive   = true

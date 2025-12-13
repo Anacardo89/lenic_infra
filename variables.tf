@@ -81,14 +81,20 @@ variable "db_name" {
   description = "Database name"
 }
 
-variable "db_user" {
+variable "db_admin_user" {
   type        = string
   default     = "lenic_admin"
   description = "Database admin username"
 }
 
-variable "db_password" {
+variable "db_admin_password" {
   type        = string
   sensitive   = true
   description = "Database admin password"
+}
+
+variable "db_user" {
+  type        = string
+  default     = "lenic_runner"
+  description = "Database user for IAM DB authentication"
 }
