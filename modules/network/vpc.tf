@@ -4,7 +4,7 @@ resource "aws_vpc" "this" {
   enable_dns_hostnames = true
 
   tags = {
-    Name        = "${var.project_name}-${var.environment}-vpc"
+    Name        = "${ var.project_name }-${ var.environment }-vpc"
     Project     = var.project_name
     Environment = var.environment
     ManagedBy   = "Terraform"

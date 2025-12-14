@@ -4,7 +4,8 @@ module "iam" {
   aws_region          = var.aws_region
   project_name        = var.project_name
   rds_dbi_resource_id = module.database.rds_dbi_resource_id
-  db_user             = var.db_user
+  db_runner           = var.db_runner
+  db_migrator         = var.db_migrator
 }
 
 module "network" {
@@ -26,6 +27,7 @@ module "compute" {
   subnet_id          = module.network.public_subnet_ids[0]
   ec2_keypair_name   = var.ec2_keypair_name
   ec2_ssh_public_key = var.ec2_ssh_public_key
+  runner_role_name   = module.iam.runner_role_name
 }
 
 module "database" {

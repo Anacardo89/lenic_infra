@@ -1,17 +1,9 @@
-output "builder_access_key" {
-  value = aws_iam_access_key.builder_key.id
-}
-
-output "builder_access_secret" {
-  value     = aws_iam_access_key.builder_key.secret
+output "deployer_arn" {
+  value     = aws_iam_role.deployer.arn
   sensitive = true
 }
-
-output "runner_access_key" {
-  value = aws_iam_access_key.runner_key.id
-}
-
-output "runner_access_secret" {
-  value     = aws_iam_access_key.runner_key.secret
+output "runner_arn" {
+  value     = aws_iam_role.runner.arn
   sensitive = true
 }
+output "runner_role_name" { value = aws_iam_role.runner.name }

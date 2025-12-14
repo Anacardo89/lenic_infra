@@ -1,4 +1,4 @@
-# Global
+# Auth
 variable "aws_terraform_key" {
   type        = string
   description = "Terraform user access Key ID"
@@ -8,18 +8,17 @@ variable "aws_terraform_secret" {
   description = "Terraform user access Key secret"
 }
 
+# Global
 variable "environment" {
   type        = string
   default     = "dev"
   description = "Deployment environment (e.g. dev, prod)"
 }
-
 variable "aws_region" {
   type        = string
   default     = "eu-west-3"
   description = "AWS region for the deployment"
 }
-
 variable "project_name" {
   type        = string
   default     = "lenic"
@@ -32,7 +31,6 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
   description = "CIDR block for the VPC"
 }
-
 variable "public_subnets" {
   type = list(object({
     cidr = string
@@ -43,7 +41,6 @@ variable "public_subnets" {
   ]
   description = "Public subnets with CIDR and AZ"
 }
-
 variable "private_subnets" {
   type = list(object({
     cidr = string
@@ -62,13 +59,11 @@ variable "instance_type" {
   default     = "t2.micro"
   description = "EC2 instance type"
 }
-
 variable "ec2_keypair_name" {
   type        = string
   default     = "lenic-ec2-keypair"
   description = "Name of the existing AWS key pair for SSH access"
 }
-
 variable "ec2_ssh_public_key" {
   type        = string
   description = "SSH Public key for EC2"
@@ -80,21 +75,23 @@ variable "db_name" {
   default     = "lenicDB"
   description = "Database name"
 }
-
 variable "db_admin_user" {
   type        = string
   default     = "lenic_admin"
   description = "Database admin username"
 }
-
 variable "db_admin_password" {
   type        = string
   sensitive   = true
   description = "Database admin password"
 }
-
-variable "db_user" {
+variable "db_runner" {
   type        = string
   default     = "lenic_runner"
-  description = "Database user for IAM DB authentication"
+  description = "Database user for app runtime"
+}
+variable "db_migrator" {
+  type        = string
+  default     = "lenic_migrator"
+  description = "Database user for migrations"
 }
