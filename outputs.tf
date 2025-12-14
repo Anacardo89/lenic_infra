@@ -1,30 +1,39 @@
-output "instance_id" {
-  description = "The ID of the EC2 instance"
-  value       = aws_instance.lenic_server.id
+# IAM
+output "deployer_arn" {
+  value     = module.iam.deployer_arn
+  sensitive = true
+}
+output "runner_arn" {
+  value     = module.iam.runner_arn
+  sensitive = true
 }
 
-output "public_ip" {
-  description = "The public IP address of the EC2 instance"
-  value       = aws_instance.lenic_server.public_ip
+# Compute
+output "ec2_public_ip" {
+  value       = module.compute.ec2_public_ip
+  sensitive   = true
+}
+output "ec2_public_dns" {
+  value       = module.compute.ec2_public_dns
+  sensitive   = true
 }
 
-output "public_dns" {
-  description = "The public DNS name of the EC2 instance"
-  value       = aws_instance.lenic_server.public_dns
-}
-
+# Database
 output "rds_endpoint" {
-  description = "The connection endpoint for the RDS PostgreSQL instance"
-  value       = aws_db_instance.postgres.endpoint
+  value       = module.database.rds_endpoint
+  sensitive   = true
 }
-
 output "rds_port" {
-  description = "The port on which the RDS instance is listening"
-  value       = aws_db_instance.postgres.port
+  value       = module.database.rds_port
+  sensitive   = true
 }
 
-output "rds_username" {
-  description = "The master username for the RDS instance"
-  value       = aws_db_instance.postgres.username
+# Storage
+output "config_bucket_name" {
+  value       = module.storage.config_bucket_name
+  sensitive   = true
+}
+output "config_bucket_arn" {
+  value       = module.storage.config_bucket_arn
   sensitive   = true
 }
