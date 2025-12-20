@@ -13,10 +13,11 @@ jobs:
     name: Destroy Terraform Dev Infrastructure
     runs-on: ubuntu-latest
     env:
-      TF_VAR_aws_terraform_key: ${{ secrets.AWS_TERRAFORM_KEY }}
-      TF_VAR_aws_terraform_secret: ${{ secrets.AWS_TERRAFORM_SECRET }}
-      TF_VAR_ec2_ssh_public_key: ${{ secrets.EC2_SSH_PUBLIC_KEY }}
-      TF_VAR_db_admin_password: ${{ secrets.DB_PASSWORD }}
+      TF_VAR_aws_terraform_key:       ${{ secrets.AWS_TERRAFORM_KEY }}
+      TF_VAR_aws_terraform_secret:    ${{ secrets.AWS_TERRAFORM_SECRET }}
+      TF_VAR_ec2_ssh_public_key:      ${{ secrets.EC2_SSH_PUBLIC_KEY }}
+      TF_VAR_cicd_ec2_ssh_public_key: ${{ secrets.CICD_EC2_SSH_PUBLIC_KEY }}
+      TF_VAR_db_admin_password:       ${{ secrets.DB_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v4

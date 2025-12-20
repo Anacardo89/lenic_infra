@@ -19,15 +19,16 @@ module "network" {
 }
 
 module "compute" {
-  source             = "./modules/compute"
-  environment        = var.environment
-  project_name       = var.project_name
-  instance_type      = var.instance_type
-  vpc_id             = module.network.vpc_id
-  subnet_id          = module.network.public_subnet_ids[0]
-  ec2_keypair_name   = var.ec2_keypair_name
-  ec2_ssh_public_key = var.ec2_ssh_public_key
-  runner_role_name   = module.iam.runner_role_name
+  source                  = "./modules/compute"
+  environment             = var.environment
+  project_name            = var.project_name
+  instance_type           = var.instance_type
+  vpc_id                  = module.network.vpc_id
+  subnet_id               = module.network.public_subnet_ids[0]
+  ec2_keypair_name        = var.ec2_keypair_name
+  ec2_ssh_public_key      = var.ec2_ssh_public_key
+  cicd_ec2_ssh_public_key = var.cicd_ec2_ssh_public_key
+  runner_role_name        = module.iam.runner_role_name
 }
 
 module "database" {

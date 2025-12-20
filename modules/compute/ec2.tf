@@ -7,6 +7,14 @@ resource "aws_instance" "this" {
 
   key_name = aws_key_pair.this.key_name
 
+  user_data = <<-EOF
+              #!/bin/bash
+              mkdir -p /home/ec2-user/.ssh
+              echo "${var.cicd_ec2_ssh_public_key}" >> /home/ec2-user/.ssh/authorized_keys
+              chown ec2-user:ec2-user /home/ec2-user/.ssh/authorized_keys
+              chmod 600 /home/ec2-user/.ssh/authorized_keys
+              EOF
+
   iam_instance_profile = aws_iam_instance_profile.this.name
 
   root_block_device {

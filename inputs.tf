@@ -68,6 +68,10 @@ variable "ec2_ssh_public_key" {
   type        = string
   description = "SSH Public key for EC2"
 }
+variable "cicd_ec2_ssh_public_key" {
+  type        = string
+  description = "SSH Public key for EC2 for CICD"
+}
 
 # Database
 variable "db_name" {
